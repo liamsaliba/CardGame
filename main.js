@@ -1,7 +1,11 @@
+// local arrays
 var deck = [];
 var hand = [];
 var table = [];
-// debug
+
+var delaySpeed = 20;
+
+// jquery elements use for performance
 var deckList = $('#deck').find("ul");
 var handList = $('#hand').find("ul");
 var tableList = $('#table').find("ul");
@@ -58,13 +62,16 @@ function Suit(id, string, symbol, color, value){
 	this.getColor = function(){return this.color;};
 };
 
-function Card(rank, suit) {
+function Card(rank, suit, visibility) {
 	// generate individual card value to prevent forgery
+
 	this.id = generateUUID();
 
 	// sets rank and suit as typed in objects
 	this.rank = rank;
 	this.suit = suit;
+	var visibility = (typeof visibility !== 'undefined') ? visibility : true;
+	this.visibility = visibility;
 
 	// returns abbreviated string for display eg: A
 	this.toShortString = function(){
@@ -91,15 +98,25 @@ function resetStack(stack) {
 };
 
 function displayStack(stack, stackList, show){
-	stackList.empty();
-	stackList.append('<li class="special fa fa-random"></li>');
-	stackList.append('<li class="special fa fa-plus-square-o"></li>');
+	var show = (typeof show !== 'undefined') ? show : true;
+
 	for(card in stack){
-		stackList.append(displayCard(stack[card], show));
+		$(":first-child", stackList).delay(delaySpeed*card).fadeOut(delaySpeed);
+	}
+	stackList.empty();
+	for(card in stack){
+		stackList.prepend(displayCard(stack[card], show));
+		$(":first-child", stackList)
+			.hide()
+			.delay(delaySpeed*card).fadeIn(delaySpeed)
+			.click();
 	}
 };
 
 function displayCard(card, show){
+	var show = (typeof show !== 'undefined') ? show : true;
+
+
 	var classes = "card";
 	if(card.suit.getColor() === "Red")
 		classes += " red";
@@ -109,6 +126,28 @@ function displayCard(card, show){
 	}
 	return "<li class='" + classes + "'>" + card.rank.getSymbol() + "<br><span class='suit'>" + card.suit.getSymbol() + "</li>";
 }
+
+
+$(".shuffle").click(function(){
+	var parent = $(this).parents(".cardlist").attr("id");
+	switch(parent){
+		case "deck":
+			shuffle(deck);
+			displayStack(deck, deckList, true);
+			break;
+		case "hand":
+			shuffle(hand);
+			displayStack(hand, handList, true);
+			break;
+		case "table":
+			shuffle(table);
+			displayStack(table, tableList, true);
+			break;
+		default:
+			console.warn("Caught unknown parent on shuffle click: " + parent);
+			break;
+	}
+});
 
 // shuffles array / deck / hand
 function shuffle(array){
@@ -122,12 +161,14 @@ function shuffle(array){
 
 		// Swap with current element
 		swap = array[current];
-		array[element] = array[random];
+		array[current] = array[random];
 		array[random] = swap;
 
 	}
 	return array;
 }
+
+
 
 // function resets
 deck = resetStack(deck);

@@ -4,6 +4,7 @@
 	font-family: sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	box-sizing: border-box;
 }
 
 .container {
@@ -12,16 +13,17 @@
 
 header {
 	background: #eee;
-	margin: 10px;
+	margin: 5px;
 	padding: 10px;
+	border: 1px solid black;
 }
 
 .cardlist {
-	margin-left: 1em;
-	padding: 5px;
 	border: 1px solid black;
+	padding: 5px;
 	margin: 5px;
 	width: calc(100%-10px);
+	height: 167px;
 }
 .cardlist h2 {
 	text-align: center;
@@ -29,16 +31,49 @@ header {
 }
 
 .cardlist ul {
-	margin-top: 0;
 	list-style-type: none;
-	overflow-x: auto;
-	overflow-y: hidden;
-	padding: 3px;
-	width: 100%;
 }
 
-.cardlist ul li {
+
+.btns {
+	padding-top: 1px;
 	float: left;
+	width: 50px;
+}
+
+.special {
+	background-color: black !important;
+	color: white;
+	cursor: hand;
+	text-align: center;
+	height: 45px;
+	width: 45px;
+	border-radius: 10px;
+	padding-top: 11px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	font-size: 25px !important;
+}
+
+.special:hover {
+	background-color: #333 !important;
+	z-index: 10;
+
+}
+
+
+.stack-container {
+	margin-right: 5px;
+}
+
+.stack {
+	overflow-x: auto;
+	overflow-y: hidden;
+	white-space: nowrap;
+}
+
+.stack li {
+	display: inline-block;
 	text-align: center;
 	border-radius: 10px;
 	width: 100px;
@@ -47,8 +82,9 @@ header {
 	border: 1px black;
 	margin: 5px;
 	padding: 5px;
+	padding-top: 0px;
 	font-size: 55px;
-	line-height: 47px;
+	line-height: 50px;
 	-moz-box-shadow: 0 0 5px #888;
 	-webkit-box-shadow: 0 0 5px#888;
 	box-shadow: 0 0 5px #888;
@@ -59,10 +95,21 @@ header {
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
                                   not supported by any browser */
+	cursor: move;
 }
 
-.card {
-    cursor: move;
+.stack li:last-child {
+	margin-right: 100px;
+}
+
+.stack li:hover {
+	background-color: #eee;
+}
+
+.stack li:active{
+	-moz-box-shadow: 0 0 15px #888;
+	-webkit-box-shadow: 0 0 15px#888;
+	box-shadow: 0 0 15px #888;
 }
 
 .red {
@@ -73,14 +120,10 @@ header {
 	font-size: 70px;
 }
 
-.special {
-	background-color: black !important;
-	color: white;
-	cursor: hand;
-	display: block;
-	padding-top: 35px !important;
-	height: 70px !important;
-}
+
+
+
+
 
 
 .facedown {

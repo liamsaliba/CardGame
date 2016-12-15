@@ -3,7 +3,7 @@ var deck = [];
 var hand = [];
 var table = [];
 
-var delaySpeed = 20;
+var delaySpeed = 10;
 
 // jquery elements use for performance
 var deckList = $('#deck').find("ul");
@@ -97,6 +97,10 @@ function resetStack(stack) {
 	return stack;
 };
 
+function dealStack(stack1, stack2){
+
+}
+
 function displayStack(stack, stackList, show){
 	var show = (typeof show !== 'undefined') ? show : true;
 
@@ -115,17 +119,16 @@ function displayStack(stack, stackList, show){
 
 			})
 			.css({
-				'transform': 'translate('+offset+'px, 0px) rotate('+r+'deg) ',
-    		'-webkit-transform': 'translate('+offset+'px, 0px) rotate('+r+'deg) ',
-			'-moz-transform': 'translate('+offset+'px, 0px) rotate('+r+'deg)',
-			'-ms-transform': 'translate('+offset+'px, 0px)'			
+				'transform': 'rotate('+r+'deg) ',
+    		'-webkit-transform': 'rotate('+r+'deg) ',
+			'-moz-transform': 'rotate('+r+'deg)'			
 			})
 			.css({
 				'z-index': card
 			});
 	}
 
-	$(":first-child", stackList).addClass("clickable");
+	$("li:first-child", stackList).addClass("clickable");
 };
 
 function displayCard(card, show){
@@ -137,14 +140,14 @@ function displayCard(card, show){
 		classes += " red";
 
 	if(!show){
-		return "<li class='card back'>N/A</li>";
+		return "<li class='card back'>N/A<span class='uuid'>" + card.getID() + "</span></li>";
 	}
-	return "<li class='" + classes + "'>" + card.rank.getSymbol() + "<br><span class='suit'>" + card.suit.getSymbol() + "</li>";
+	return "<li class='" + classes + "'>" + card.rank.getSymbol() + "<br><span class='suit'>" + card.suit.getSymbol() + "</span><span class='uuid'>" + card.getID() + "</span></li>";
 }
 
-
+// shuffle click -- shuffles deck then displays deck
 $(".shuffle").click(function(){
-	var parent = $(this).parents(".cardlist").attr("id");
+	var parent = $(this).parents(".cardlist").attr("id"); // used to find the button that was pushed, stored to post exception if needed
 	switch(parent){
 		case "deck":
 			shuffle(deck);

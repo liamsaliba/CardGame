@@ -77,15 +77,18 @@ header {
 	margin-right: 5px;
 }
 
-.stack {
+.spread {
 	overflow-x: auto;
 	overflow-y: hidden;
 	white-space: nowrap;
 }
 
 .stack li {
-	display: inline-block;
-	position: relative;
+	position: absolute;
+	left: 100px;
+}
+
+.cards li {
 	text-align: center;
 	border-radius: 10px;
 	width: 100px;
@@ -104,8 +107,10 @@ header {
 	cursor: move;
 }
 
-.stack li:last-child {
-	margin-right: 100px;
+
+.spread li {
+	display: inline-block;
+	margin-right: -40px
 }
 
 
@@ -118,13 +123,13 @@ header {
 	opacity: 1 !important;
 }
 
-.stack li:not(.back):hover {
+.spread li:not(.back):hover {
 	opacity: 1;
 	transition: all 0.3s ease 0s;
 	z-index: 1000 !important;
 }
 
-.stack li:not(.back):active{
+.spread li:not(.back):active{
 	-moz-box-shadow: 0 0 15px #888;
 	-webkit-box-shadow: 0 0 15px#888;
 	box-shadow: 0 0 15px #888;
@@ -156,7 +161,8 @@ header {
 }
 
 .clickable:hover {
-	opacity: .7;
+	filter:brightness(200%);
+	transition: all 0.3s ease 0s;
 }
 
 .clickable:active {
@@ -172,6 +178,7 @@ header {
 
 .uuid {
 	display: none;
+	font-size: 4px;
 }
 
 .hidden {

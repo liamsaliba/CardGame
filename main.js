@@ -105,12 +105,27 @@ function displayStack(stack, stackList, show){
 	}
 	stackList.empty();
 	for(card in stack){
+		var r = (Math.random()*10)-5;
+		var offset = 150-95*(stack.length - card);
 		stackList.prepend(displayCard(stack[card], show));
 		$(":first-child", stackList)
 			.hide()
 			.delay(delaySpeed*card).fadeIn(delaySpeed)
-			.click();
+			.click(function() {
+
+			})
+			.css({
+				'transform': 'translate('+offset+'px, 0px) rotate('+r+'deg) ',
+    		'-webkit-transform': 'translate('+offset+'px, 0px) rotate('+r+'deg) ',
+			'-moz-transform': 'translate('+offset+'px, 0px) rotate('+r+'deg)',
+			'-ms-transform': 'translate('+offset+'px, 0px)'			
+			})
+			.css({
+				'z-index': card
+			});
 	}
+
+	$(":first-child", stackList).addClass("clickable");
 };
 
 function displayCard(card, show){
@@ -122,7 +137,7 @@ function displayCard(card, show){
 		classes += " red";
 
 	if(!show){
-		return "<li class='card facedown'>N/A</li>";
+		return "<li class='card back'>N/A</li>";
 	}
 	return "<li class='" + classes + "'>" + card.rank.getSymbol() + "<br><span class='suit'>" + card.suit.getSymbol() + "</li>";
 }

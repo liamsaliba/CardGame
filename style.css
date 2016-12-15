@@ -5,6 +5,16 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	box-sizing: border-box;
+
+			  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+     -khtml-user-select: none; /* Konqueror */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  not supported by any browser */
+
+	cursor: default;
 }
 
 .container {
@@ -41,6 +51,7 @@ header {
 	width: 50px;
 }
 
+/* some of this may be repititious... */
 .special {
 	background-color: black !important;
 	color: white;
@@ -74,6 +85,7 @@ header {
 
 .stack li {
 	display: inline-block;
+	position: relative;
 	text-align: center;
 	border-radius: 10px;
 	width: 100px;
@@ -88,13 +100,7 @@ header {
 	-moz-box-shadow: 0 0 5px #888;
 	-webkit-box-shadow: 0 0 5px#888;
 	box-shadow: 0 0 5px #888;
-		  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Chrome/Safari/Opera */
-     -khtml-user-select: none; /* Konqueror */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  not supported by any browser */
+
 	cursor: move;
 }
 
@@ -102,11 +108,23 @@ header {
 	margin-right: 100px;
 }
 
-.stack li:hover {
-	background-color: #eee;
+
+.card:hover li {
+	transition: all 0.3s ease 0s;
+	opacity: .7
 }
 
-.stack li:active{
+#deck > .stack:hover {
+	opacity: 1 !important;
+}
+
+.stack li:not(.back):hover {
+	opacity: 1;
+	transition: all 0.3s ease 0s;
+	z-index: 1000 !important;
+}
+
+.stack li:not(.back):active{
 	-moz-box-shadow: 0 0 15px #888;
 	-webkit-box-shadow: 0 0 15px#888;
 	box-shadow: 0 0 15px #888;
@@ -126,12 +144,36 @@ header {
 
 
 
-.facedown {
+.back {
 	color: transparent;
 	background: url(https://thomaslmcdonald.files.wordpress.com/2010/09/3fbfd-beeback.jpg);
 	background-position: center;
-    cursor: not-allowed;
+    cursor: no-drop !important;
 }
+
+.clickable {
+	cursor: hand !important;
+}
+
+.clickable:hover {
+	opacity: .7;
+}
+
+.clickable:active {
+	-moz-box-shadow: 0 0 15px #888;
+	-webkit-box-shadow: 0 0 15px#888;
+	box-shadow: 0 0 15px #888;
+}
+
+
+
+
+
+
+.uuid {
+	display: none;
+}
+
 .hidden {
 	display: none;
 }

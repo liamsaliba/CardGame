@@ -122,7 +122,7 @@ function displayStack(stack, stackList, show){
 				}
 				else{
 					$(this).addClass("back");
-					$(this).html('<span class="uuid">' + card.getID() + '</span>');
+					$(this).html('');
 				}
 			})
 			.css({

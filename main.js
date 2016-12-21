@@ -112,23 +112,31 @@ function displayStack(stack, stackList, show){
 		var r = (Math.random()*10)-5;
 		var offset = 150-95*(stack.length - card);
 		stackList.prepend(displayCard(stack[card], show));
-		$(":first-child", stackList)
+		$("li:first-child", stackList)
 			.hide()
 			.delay(delaySpeed*card).fadeIn(delaySpeed)
 			.click(function() {
-
+				if($(this).hasClass("back")){
+					$(this).removeClass("back");
+					// TODO: decode hash to return card face
+				}
+				else{
+					$(this).addClass("back");
+					$(this).html('<span class="uuid">' + card.getID() + '</span>');
+				}
 			})
 			.css({
 				'transform': 'rotate('+r+'deg) ',
     		'-webkit-transform': 'rotate('+r+'deg) ',
-			'-moz-transform': 'rotate('+r+'deg)'			
+			'-moz-transform': 'rotate('+r+'deg)',
+			'z-index': card		
 			})
 			.css({
-				'z-index': card
+				
 			});
 	}
-
-	$("li:first-child", stackList).addClass("clickable");
+	if(stackList.parents(".cardlist").attr("id") == "deck")
+		$("li:first-child", stackList).addClass("clickable");
 };
 
 function displayCard(card, show){

@@ -14,7 +14,6 @@
             user-select: none; /* Non-prefixed version, currently
                                   not supported by any browser */
 
-	cursor: default;
 }
 
 .container {
@@ -72,7 +71,6 @@ header {
 
 }
 
-
 .stack-container {
 	margin-right: 5px;
 }
@@ -81,11 +79,6 @@ header {
 	overflow-x: auto;
 	overflow-y: hidden;
 	white-space: nowrap;
-}
-
-.stack li {
-	position: absolute;
-	left: 100px;
 }
 
 .cards li {
@@ -107,16 +100,21 @@ header {
 	cursor: move;
 }
 
+.stack li {
+	position: absolute;
+	left: 100px;
+}
 
 .spread li {
 	display: inline-block;
-	margin-right: -40px
+	margin-right: -40px;
+	cursor: move;
 }
 
 
 .card:hover li {
 	transition: all 0.3s ease 0s;
-	opacity: .7
+	opacity: .7;
 }
 
 #deck > .stack:hover {
@@ -127,6 +125,7 @@ header {
 	opacity: 1;
 	transition: all 0.3s ease 0s;
 	z-index: 1000 !important;
+	cursor: move;
 }
 
 .spread li:not(.back):active{
@@ -161,7 +160,7 @@ header {
 }
 
 .clickable:hover {
-	filter:brightness(200%);
+	filter:brightness(150%);
 	transition: all 0.3s ease 0s;
 }
 
@@ -177,6 +176,7 @@ header {
 
 
 .uuid {
+	color: transparent;
 	display: none;
 	font-size: 4px;
 }
